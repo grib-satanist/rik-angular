@@ -1,0 +1,44 @@
+<app-header></app-header>
+<mat-drawer-container class="main-container">
+  <mat-drawer mode="side" opened class="menu">Панель</mat-drawer>
+  <mat-drawer-content>
+    <div class="content">
+      <div class="nav-block">
+        <button mat-button type="button">
+          <span class="material-icons">chevron_left</span>
+          Назад
+        </button>
+      </div>
+
+      <h2>Настройка учетных записей сотрудников контрагента</h2>
+
+      <div class="filter-block" style="display: flex; justify-content: space-between;">
+        <div style="display: flex;">
+          <button mat-raised-button color="primary" type="button" style="margin-right: 15px; display: flex; flex-direction: row-reverse;">
+            <span style="margin-right: 10px;">Добавить</span>
+            <mat-icon>add_circle</mat-icon>
+          </button>
+          <button mat-raised-button color="primary" type="button" style="margin-right: 15px; display: flex; flex-direction: row-reverse;">
+            <span style="margin-right: 10px;">Разблокировать</span>
+            <mat-icon>check_circle</mat-icon>
+          </button>
+          <button mat-raised-button color="primary" type="button" style="display: flex; flex-direction: row-reverse;">
+            <span style="margin-right: 10px;">Заблокировать</span>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" type="button" disabled>
+            <mat-icon>filter_list</mat-icon>
+            Фильтр
+          </button>
+        </div>
+      </div>
+
+      <app-account-form></app-account-form>
+      <app-accounts *ngIf="accountsList" [accountsList]="accountsList"></app-accounts>
+
+      <mat-spinner *ngIf="loading" diameter="50" style="display: flex; margin: 20px auto;"></mat-spinner>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

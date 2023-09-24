@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  margin-top: 40px;
+  th {
+    background-color: #DA2032;
+    color: white;
+  }
+
+  .status, .status-ecp {
+    color: #FF001F;
+  }
+
+  .status.active, .status-ecp.active {
+    color: #25B553;
+  }
+}

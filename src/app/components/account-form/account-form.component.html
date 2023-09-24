@@ -1,0 +1,34 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Фильтр</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="form">
+      <div class="form-fields-block">
+        <ng-container *ngFor="let field of formFields">
+          <div class="field">
+            <span>{{field.name}}</span>
+            <mat-form-field appearance="outline">
+              <input matInput type="text">
+              <button class="button-clear" matSuffix mat-icon-button aria-label="Очистить">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="form-buttons-block">
+        <button mat-raised-button color="primary" type="button">
+          Применить
+        </button>
+        <button mat-raised-button color="primary" type="button" disabled>
+          Отмена
+        </button>
+        <button mat-raised-button color="primary" type="button" disabled>
+          Сбросить
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
