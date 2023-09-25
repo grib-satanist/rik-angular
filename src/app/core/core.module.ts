@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DependenciesModule } from '../shared/dependencies.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PhonePipe } from './pipes/phone.pipe';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    PhonePipe
   ],
   exports: [
     CommonModule,
@@ -23,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    PhonePipe
   ],
   providers: [AsyncPipe]
 })
