@@ -3,17 +3,33 @@
     <mat-card-title>Фильтр</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form class="form">
+    <form class="form" [formGroup]="form">
       <div class="form-fields-block">
-        <ng-container *ngFor="let field of formFields">
+        <ng-container *ngFor="let field of formFields" [ngSwitch]="field.type">
           <div class="field">
-            <span>{{field.name}}</span>
-            <mat-form-field appearance="outline">
-              <input matInput type="text">
-              <button class="button-clear" matSuffix mat-icon-button aria-label="Очистить">
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-form-field>
+            <span class="field-title">{{field.name}}</span>
+
+            <ng-container *ngSwitchCase="'select'">
+              <mat-form-field appearance="outline">
+                <mat-select [formControlName]="field.id">
+                  <mat-option *ngFor="let val of field.values" [value]="val.value">
+                    {{val.title}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+
+            <ng-container *ngSwitchDefault>
+              <mat-form-field appearance="outline">
+                <input [formControlName]="field.id" matInput type="text">
+                <button *ngIf="form.controls[field.id].value.length" (click)="form.controls[field.id].setValue('')" class="button-clear" matSuffix mat-icon-button aria-label="Очистить">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+                <mat-error *ngIf="form.controls[field.id].errors?.['pattern']">
+                  Недопустимые символы
+                </mat-error>
+              </mat-form-field>
+            </ng-container>
           </div>
         </ng-container>
       </div>

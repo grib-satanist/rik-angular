@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-account-form',
@@ -21,7 +21,11 @@ export class AccountFormComponent {
 
   buildForm(): void {
     this.formFields.forEach(field => {
-      this.form.addControl(field.id, this.fb.control(''));
+      if(field.type === 'select') {
+        this.form.addControl(field.id, this.fb.control(field.values?.[0].value));
+      } else {
+        this.form.addControl(field.id, this.fb.control('', [Validators.pattern(field.pattern ?? '')]));
+      }
     })
   }
 }
@@ -29,12 +33,12 @@ export class AccountFormComponent {
 const formFields = [{
     type: 'string',
     id: 'login',
-    pattern: '[A-Za-z]',
+    pattern: /[a-zA-Z]+/,
     name: 'Логин'
   }, {
     type: 'string',
     id: 'phone',
-    pattern: '\+?[0-9\s\-\(\)]+',
+    pattern: /\+7\(\d{3}\)\s\d{3}-\d{2}-\d{2}/,
     name: 'Телефон'
   }, {
     type: 'date',
@@ -45,6 +49,10 @@ const formFields = [{
     type: 'select',
     id: 'status',
     name: 'Статус',
+    values: [
+      {value: 'active', title: 'Активен'},
+      {value: 'block', title: 'Заблокирован'},
+    ]
   }, {
     type: 'string',
     id: 'email',
@@ -53,7 +61,11 @@ const formFields = [{
   }, {
     type: 'select',
     id: 'role',
-    name: 'Роль'
+    name: 'Роль',
+    values: [
+      {value: 'admin', title: 'Администратор'},
+      {value: 'user', title: 'Пользователь'},
+    ]
   }, {
     type: 'date',
     id: 'updateDate',
