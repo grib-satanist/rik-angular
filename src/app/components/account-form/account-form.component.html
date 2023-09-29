@@ -22,7 +22,14 @@
             <ng-container *ngSwitchDefault>
               <mat-form-field appearance="outline">
                 <input [formControlName]="field.id" matInput type="text">
-                <button *ngIf="form.controls[field.id].value.length" (click)="form.controls[field.id].setValue('')" class="button-clear" matSuffix mat-icon-button aria-label="Очистить">
+                <button
+                  *ngIf="form.controls[field.id].value?.length"
+                  (click)="form.controls[field.id].setValue('')"
+                  class="button-clear"
+                  matSuffix
+                  mat-icon-button
+                  aria-label="Очистить"
+                >
                   <mat-icon>cancel</mat-icon>
                 </button>
                 <mat-error *ngIf="form.controls[field.id].errors?.['pattern']">
@@ -35,13 +42,13 @@
       </div>
 
       <div class="form-buttons-block">
-        <button mat-raised-button color="primary" type="button">
+        <button (click)="isValid() && filter()" mat-raised-button color="primary" type="button">
           Применить
         </button>
-        <button mat-raised-button color="primary" type="button" disabled>
+        <button (click)="cancelFilter()" mat-raised-button color="primary" type="button" [disabled]="!isFiltered">
           Отмена
         </button>
-        <button mat-raised-button color="primary" type="button" disabled>
+        <button (click)="resetFilters()" mat-raised-button color="primary" type="button" [disabled]="!isFiltered">
           Сбросить
         </button>
       </div>

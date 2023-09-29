@@ -16,16 +16,19 @@ export class MainComponent implements OnInit {
 
   constructor(private http: HttpService){}
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.askAccounts();
   }
 
-  ngOnDestroy():void {
+  ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }
 
-  private askAccounts():void {
+  filterAccounts(filter: any): void {
+  }
+
+  private askAccounts(): void {
     this.http.get({
       url: 'http://cars.cprogroup.ru/api/rubetek/angular-testcase-list/'
     })
@@ -37,7 +40,7 @@ export class MainComponent implements OnInit {
     });
   }
 
-  private formatAccountList():void {
+  private formatAccountList(): void {
     this.accountsList.data.forEach(item => {
       item.user = this.accountsList.users.find(user => user.id === item.user_id);
     })
@@ -52,6 +55,7 @@ export interface AccountsData {
     size: number,
   };
   users: AccountUser[];
+  paginator?: any
 }
 
 export interface AccountItem {

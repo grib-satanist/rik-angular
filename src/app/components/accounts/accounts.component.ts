@@ -16,14 +16,6 @@ export class AccountsComponent {
   dataSource: MatTableDataSource<AccountItem>;
 
   constructor(){}
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-
-  ngOnInit(){
-    this.dataSource = new MatTableDataSource(this.accountsList.data);
-  }
 }
 
 const dutchRangeLabel = (page: number, pageSize: number, length: number) => {

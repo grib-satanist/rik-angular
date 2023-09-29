@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,11 +8,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class AccountFormComponent {
+  @Output() onFilter: EventEmitter<typeof formFields>;
   formFields = formFields;
   form: FormGroup;
+  isFiltered: boolean;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({});
+    this.onFilter = new EventEmitter<typeof formFields>();
+    this.isFiltered = false;
   }
 
   ngOnInit(): void {
@@ -22,13 +26,41 @@ export class AccountFormComponent {
   buildForm(): void {
     this.formFields.forEach(field => {
       if(field.type === 'select') {
-        this.form.addControl(field.id, this.fb.control(field.values?.[0].value));
+        this.form.addControl(field.id, this.fb.nonNullable.control(field.values?.[0].value));
       } else {
-        this.form.addControl(field.id, this.fb.control('', [Validators.pattern(field.pattern ?? '')]));
+        this.form.addControl(field.id, this.fb.nonNullable.control('', [Validators.pattern(field.pattern ?? '')]));
       }
     })
   }
+
+  cancelFilter(): void {
+
+  }
+
+  filter(): void {
+    this.isFiltered = true;
+    let filter = this.form.value;
+
+    Object.keys(this.form.value).forEach(val => {
+      if(!filter[val]) {
+        delete filter[val];
+      }
+    })
+
+    this.onFilter.emit((filter));
+  }
+
+  isValid(): boolean {
+    return this.form.valid;
+  }
+
+  resetFilters(): void {
+    this.form.reset();
+    this.isFiltered = false;
+  }
 }
+
+
 
 const formFields = [{
     type: 'string',
