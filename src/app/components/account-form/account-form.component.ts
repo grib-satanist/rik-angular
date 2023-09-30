@@ -11,12 +11,11 @@ export class AccountFormComponent {
   @Output() onFilter: EventEmitter<typeof formFields>;
   formFields = formFields;
   form: FormGroup;
-  isFiltered: boolean;
+  filters = {} as any;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({});
     this.onFilter = new EventEmitter<typeof formFields>();
-    this.isFiltered = false;
   }
 
   ngOnInit(): void {
@@ -34,20 +33,24 @@ export class AccountFormComponent {
   }
 
   cancelFilter(): void {
+    this.filters = {};
+    this.onFilter.emit(this.filters);
+  }
 
+  canCancel(): boolean {
+    return !Object.keys(this.filters).length;
   }
 
   filter(): void {
-    this.isFiltered = true;
-    let filter = this.form.value;
+    this.filters = this.form.value;
 
     Object.keys(this.form.value).forEach(val => {
-      if(!filter[val]) {
-        delete filter[val];
+      if(!this.filters[val]) {
+        delete this.filters[val];
       }
     })
 
-    this.onFilter.emit((filter));
+    this.onFilter.emit((this.filters));
   }
 
   isValid(): boolean {
@@ -56,7 +59,7 @@ export class AccountFormComponent {
 
   resetFilters(): void {
     this.form.reset();
-    this.isFiltered = false;
+
   }
 }
 
@@ -64,7 +67,7 @@ export class AccountFormComponent {
 
 const formFields = [{
     type: 'string',
-    id: 'login',
+    id: 'name',
     pattern: /[a-zA-Z]+/,
     name: 'Логин'
   }, {
@@ -74,7 +77,7 @@ const formFields = [{
     name: 'Телефон'
   }, {
     type: 'date',
-    id: 'createDate',
+    id: 'create_at',
     pattern: '',
     name: 'Дата создания'
   }, {
@@ -82,8 +85,8 @@ const formFields = [{
     id: 'status',
     name: 'Статус',
     values: [
-      {value: 'active', title: 'Активен'},
-      {value: 'block', title: 'Заблокирован'},
+      {value: 'ACTIVE', title: 'Активен'},
+      {value: 'BLOCKED', title: 'Заблокирован'},
     ]
   }, {
     type: 'string',
@@ -92,15 +95,15 @@ const formFields = [{
     name: 'E-mail'
   }, {
     type: 'select',
-    id: 'role',
+    id: 'is_admin',
     name: 'Роль',
     values: [
-      {value: 'admin', title: 'Администратор'},
-      {value: 'user', title: 'Пользователь'},
+      {value: 'true', title: 'Администратор'},
+      {value: 'false', title: 'Пользователь'},
     ]
   }, {
     type: 'date',
-    id: 'updateDate',
+    id: 'update_at',
     pattern: '',
     name: 'Дата изменения'
   },

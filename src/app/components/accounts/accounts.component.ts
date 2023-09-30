@@ -10,9 +10,9 @@ import { AccountItem, AccountsData } from '../main/main.component';
 })
 export class AccountsComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Input() accountsList: AccountsData;
+  @Input() accountsData: AccountsData;
 
-  displayedColumns: string[] = ['action', 'login', 'email', 'phone', 'role', 'updateDate', 'createDate', 'status', 'ecp'];
+  displayedColumns: string[] = ['action', 'name', 'email', 'phone', 'is_admin', 'update_at', 'create_at', 'status', 'ecp'];
   dataSource: MatTableDataSource<AccountItem>;
 
   constructor(){}

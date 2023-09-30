@@ -45,10 +45,10 @@
         <button (click)="isValid() && filter()" mat-raised-button color="primary" type="button">
           Применить
         </button>
-        <button (click)="cancelFilter()" mat-raised-button color="primary" type="button" [disabled]="!isFiltered">
+        <button (click)="cancelFilter()" mat-raised-button color="primary" type="button" [disabled]="canCancel()">
           Отмена
         </button>
-        <button (click)="resetFilters()" mat-raised-button color="primary" type="button" [disabled]="!isFiltered">
+        <button (click)="resetFilters()" mat-raised-button color="primary" type="button" [disabled]="!form.dirty">
           Сбросить
         </button>
       </div>

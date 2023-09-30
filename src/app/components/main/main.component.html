@@ -36,7 +36,7 @@
       </div>
 
       <app-account-form (onFilter)="filterAccounts($event)"></app-account-form>
-      <app-accounts *ngIf="accountsList" [accountsList]="accountsList"></app-accounts>
+      <app-accounts *ngIf="accountsData" [accountsData]="accountsData"></app-accounts>
       <mat-spinner *ngIf="loading" diameter="50" class="spinner"></mat-spinner>
     </div>
   </mat-drawer-content>

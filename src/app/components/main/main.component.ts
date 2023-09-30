@@ -9,7 +9,8 @@ import { HttpService } from 'src/app/core/services/http.service';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
-  accountsList: AccountsData;
+  accountsList: any;
+  accountsData: any;
   showFiller = false;
   loading = true;
   private readonly destroy$ = new Subject<boolean>();
@@ -26,6 +27,19 @@ export class MainComponent implements OnInit {
   }
 
   filterAccounts(filter: any): void {
+    if(!Object.keys(filter).length) {
+      this.accountsData.data = this.accountsList;
+      this.formatAccountList();
+      return;
+    }
+
+    Object.keys(filter).forEach(key => {
+      if(key === 'is_admin') {
+        this.accountsData.data = this.accountsData.data.filter((item: any) => String(item[key]) === filter[key]);
+      } else {
+        this.accountsData.data = this.accountsData.data.filter((item: any) => item[key] === filter[key]);
+      }
+    })
   }
 
   private askAccounts(): void {
@@ -34,16 +48,17 @@ export class MainComponent implements OnInit {
     })
     .pipe(takeUntil(this.destroy$))
     .subscribe((rs: AccountsData) => {
-      this.accountsList = rs;
+      this.accountsList = rs.data;
+      this.accountsData = rs;
       this.loading = false;
       this.formatAccountList();
     });
   }
 
   private formatAccountList(): void {
-    this.accountsList.data.forEach(item => {
-      item.user = this.accountsList.users.find(user => user.id === item.user_id);
-    })
+    this.accountsData.data.forEach((item: any) => {
+      Object.assign(item, this.accountsData.users.find((user: any) => user.id === item.user_id))
+    });
   }
 }
 
@@ -55,7 +70,6 @@ export interface AccountsData {
     size: number,
   };
   users: AccountUser[];
-  paginator?: any
 }
 
 export interface AccountItem {
