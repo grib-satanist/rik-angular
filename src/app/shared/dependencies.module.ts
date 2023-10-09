@@ -14,6 +14,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatListModule
   ],
   exports: [
     CommonModule,
@@ -45,7 +47,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatTableModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatListModule
   ]
 })
 export class DependenciesModule {}

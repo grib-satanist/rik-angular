@@ -17,4 +17,19 @@
     display: flex;
     margin: 20px auto;
   }
+  .filter-block {
+    display: flex;
+    justify-content: space-between;
+  }
+  .account-action-block {
+    display: flex;
+    gap: 15px;
+    button {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+  }
+  .action-title {
+    margin-right: 10px;
+  }
 }

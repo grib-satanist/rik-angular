@@ -1,6 +1,8 @@
 <app-header></app-header>
 <mat-drawer-container class="main-container">
-  <mat-drawer mode="side" opened class="menu">Панель</mat-drawer>
+  <mat-drawer mode="side" opened class="menu">
+    <app-side-menu></app-side-menu>
+  </mat-drawer>
   <mat-drawer-content>
     <div class="content">
       <div class="nav-block">
@@ -12,18 +14,18 @@
 
       <h2>Настройка учетных записей сотрудников контрагента</h2>
 
-      <div class="filter-block" style="display: flex; justify-content: space-between;">
-        <div style="display: flex;">
-          <button mat-raised-button color="primary" type="button" style="margin-right: 15px; display: flex; flex-direction: row-reverse;">
-            <span style="margin-right: 10px;">Добавить</span>
+      <div class="filter-block">
+        <div class="account-action-block">
+          <button mat-raised-button color="primary" type="button">
+            <span class="action-title">Добавить</span>
             <mat-icon>add_circle</mat-icon>
           </button>
-          <button mat-raised-button color="primary" type="button" style="margin-right: 15px; display: flex; flex-direction: row-reverse;">
-            <span style="margin-right: 10px;">Разблокировать</span>
+          <button mat-raised-button color="primary" type="button">
+            <span class="action-title">Разблокировать</span>
             <mat-icon>check_circle</mat-icon>
           </button>
-          <button mat-raised-button color="primary" type="button" style="display: flex; flex-direction: row-reverse;">
-            <span style="margin-right: 10px;">Заблокировать</span>
+          <button mat-raised-button color="primary" type="button">
+            <span class="action-title">Заблокировать</span>
             <mat-icon>cancel</mat-icon>
           </button>
         </div>

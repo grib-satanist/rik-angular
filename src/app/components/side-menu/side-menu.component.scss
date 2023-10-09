@@ -1,0 +1,17 @@
+:host {
+  mat-list-item {
+    .mat-mdc-list-item-title, mat-icon, .mat-mdc-list-item-line, .link {
+      color: white!important;
+    }
+  }
+  .sub-title {
+    font-size: 14px;
+    font-weight: 100;
+  }
+  .link {
+    text-decoration: none;
+  }
+  .link:hover {
+    text-decoration: underline;
+  }
+}

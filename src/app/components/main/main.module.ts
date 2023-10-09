@@ -4,6 +4,7 @@ import { CoreModule } from "src/app/core/core.module";
 import { HeaderComponent } from "../header/header.component";
 import { AccountsComponent } from "../accounts/accounts.component";
 import { AccountFilterComponent } from "../accounts-filter/accounts-filter.component";
+import { SideMenuComponent } from "../side-menu/side-menu.component";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { AccountFilterComponent } from "../accounts-filter/accounts-filter.compo
     MainComponent,
     HeaderComponent,
     AccountsComponent,
-    AccountFilterComponent
+    AccountFilterComponent,
+    SideMenuComponent
   ],
   imports: [
     CoreModule,

@@ -12,12 +12,13 @@ import localeRu from '@angular/common/locales/ru';
 
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { getDutchPaginatorIntl } from './components/accounts/accounts.component';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
 
 registerLocaleData(localeRu);
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
