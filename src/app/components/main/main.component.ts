@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
+import { PhonePipe } from 'src/app/core/pipes/phone.pipe';
 import { HttpService } from 'src/app/core/services/http.service';
 
 
@@ -7,6 +8,7 @@ import { HttpService } from 'src/app/core/services/http.service';
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
+  providers: [PhonePipe]
 })
 export class MainComponent implements OnInit {
   accountsList: any;
@@ -15,7 +17,7 @@ export class MainComponent implements OnInit {
   loading = true;
   private readonly destroy$ = new Subject<boolean>();
 
-  constructor(private http: HttpService){}
+  constructor(private http: HttpService, private phonePipe: PhonePipe){}
 
   ngOnInit(): void {
     this.askAccounts();
@@ -36,6 +38,8 @@ export class MainComponent implements OnInit {
     Object.keys(filter).forEach(key => {
       if(key === 'is_admin') {
         this.accountsData.data = this.accountsData.data.filter((item: any) => String(item[key]) === filter[key]);
+      } else if(key === 'phone') {
+        this.accountsData.data = this.accountsData.data.filter((item: any) => this.phonePipe.transform(item[key]) === filter[key]);
       } else {
         this.accountsData.data = this.accountsData.data.filter((item: any) => item[key] === filter[key]);
       }
