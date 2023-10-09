@@ -2,12 +2,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-account-form',
-  templateUrl: './account-form.component.html',
-  styleUrls: ['./account-form.component.scss']
+  selector: 'app-accounts-filter',
+  templateUrl: './accounts-filter.component.html',
+  styleUrls: ['./accounts-filter.component.scss']
 })
 
-export class AccountFormComponent {
+export class AccountFilterComponent {
   @Output() onFilter: EventEmitter<typeof formFields>;
   formFields = formFields;
   form: FormGroup;
