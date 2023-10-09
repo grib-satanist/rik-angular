@@ -19,6 +19,14 @@
               </mat-form-field>
             </ng-container>
 
+            <ng-container *ngSwitchCase="'date'">
+              <mat-form-field appearance="outline">
+                <input matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </ng-container>
+
             <ng-container *ngSwitchDefault>
               <mat-form-field appearance="outline">
                 <input [formControlName]="field.id" matInput type="text">
