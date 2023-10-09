@@ -5,4 +5,20 @@
   .spacer {
     flex: 1 1 auto;
   }
+  .avatar {
+    margin-right: 4px;
+    font-size: 28px;
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+  }
+  .profile-title-block {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile-subtitle {
+    font-size: 14px;
+    font-weight: 100;
+  }
 }
